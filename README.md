@@ -32,7 +32,7 @@ which needed to be SEO friendly (check ClientApp/proxy.conf.js , where added "/i
     }
 ```
 
-It reads the static Html content, and using AngleSharp updates the Title and existing Meta tags, or creates them, if they do not exist.
+It reads the static Html content, and using AngleSharp updates the Title and existing Meta tags, or creates them, if they do not exist. (please check SeoService for implementation)
 
 Please note!!! 
 
