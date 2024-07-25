@@ -1,8 +1,5 @@
-﻿using AngleSharp;
-using Microsoft.AspNetCore.Mvc;
-using SeoFriendlySpa.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using SeoFriendlySpa.Services;
-using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace SeoFriendlySpa.Controllers;
 
