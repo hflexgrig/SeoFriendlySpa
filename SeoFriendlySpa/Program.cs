@@ -1,9 +1,15 @@
+using SeoFriendlySpa.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddTransient<IItemsService, ItemsService>();
+
+builder.Services.AddSingleton<ISeoService, SeoService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

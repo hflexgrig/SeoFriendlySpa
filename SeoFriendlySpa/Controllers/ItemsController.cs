@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SeoFriendlySpa.Models;
+using SeoFriendlySpa.Services;
 
 namespace SeoFriendlySpa.Controllers;
 
@@ -9,25 +10,21 @@ public class ItemsController : ControllerBase
 {
 
 
-    private static readonly List<Item?> testData = new()
-    {
-        new() {Id = 1, Title = "Test item 1", Content = "Test item content 1", ImagePath = "images/item1.jpg"},
-        new() {Id = 2, Title = "Test item 2", Content = "Test item content 2", ImagePath = "images/item2.jpg"},
-    };
+    
     
     private readonly ILogger<ItemsController> _logger;
+    private readonly IItemsService _itemsService;
 
-    public ItemsController(ILogger<ItemsController> logger)
+    public ItemsController(ILogger<ItemsController> logger,
+        IItemsService itemsService)
     {
         _logger = logger;
+        _itemsService = itemsService;
     }
 
     [HttpGet("{id}")]
     public async Task<Item?> Get(int id)
     {
-        //simulate IO operation e.g. query db e.t.c...
-        await Task.Delay(200);
-
-        return testData.Find(x => x.Id == id);
+        return await _itemsService.GetItem(id);
     }
 }

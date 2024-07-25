@@ -8,7 +8,8 @@ const PROXY_CONFIG = [
     context: [
       "/api",
       "/images",
-      "/item"
+      "/item",
+      "/fetch-data"
    ],
     proxyTimeout: 10000,
     target: target,
