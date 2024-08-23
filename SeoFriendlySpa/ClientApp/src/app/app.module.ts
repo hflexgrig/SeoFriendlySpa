@@ -11,6 +11,10 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ItemsComponent } from './items/items.component';
 
+// function getCustomData() {
+//   return '';
+// }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,17 @@ import { ItemsComponent } from './items/items.component';
       { path: 'item/:id', component: ItemsComponent },
     ])
   ],
-  providers: [],
+  providers: [
+    //@ts-ignore
+    {provide: "customData", useValue: executeFunction("getCustomData")},
+    //@ts-ignore
+    {provide: "itemData", useValue: executeFunction("getItemData")}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+function executeFunction(funcName:string){
+
+  return  eval('typeof ' + funcName) === 'function' ? eval(funcName)() : "";
+}

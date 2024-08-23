@@ -36,6 +36,9 @@ yarn-error.log
 testem.log
 /typings
 
+#angular
+.angular/cache
+
 # System Files
 .DS_Store
 Thumbs.db

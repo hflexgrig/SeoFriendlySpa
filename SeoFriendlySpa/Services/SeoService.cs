@@ -1,3 +1,6 @@
+using System.Text;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
@@ -31,7 +34,8 @@ public class SeoService : ISeoService
     }
 
     public async Task<ContentResult> SetMetasAndGetContentResult(string title,
-        IDictionary<HtmlMetaTagKey, string> metasDictionary)
+        IDictionary<HtmlMetaTagKey, string> metasDictionary,
+        IDictionary<string, object>? functionData = null)
     {
         var doc = await HtmlDocument.Value;
 
@@ -79,6 +83,26 @@ public class SeoService : ISeoService
             clonedDoc.Head.AppendChild(meta);
         }
 
+        if (functionData?.Any() == true)
+        {
+            var script = clonedDoc.CreateElement<IHtmlScriptElement>();
+            var sb = new StringBuilder();
+
+            var serializeOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+            
+            foreach (var (key, value) in functionData)
+            {
+                var dataSerialized = System.Text.Json.JsonSerializer.Serialize(value, serializeOptions);
+                // var escaped = Regex.Escape(dataSerialized);
+                sb.Append($"function {key}(){{return {dataSerialized};}}");
+            }
+            script.TextContent = sb.ToString();
+            clonedDoc.Body.AppendElement(script);
+        }
 
         return new ContentResult()
         {
@@ -86,6 +110,7 @@ public class SeoService : ISeoService
             Content = clonedDoc.DocumentElement.OuterHtml
         };
     }
+
 
 }
 

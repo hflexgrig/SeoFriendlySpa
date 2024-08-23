@@ -31,6 +31,10 @@ public class SeoController : ControllerBase
                 {new HtmlMetaTagKey("name", "description"), item.Content},
                 {new HtmlMetaTagKey("name", "keywords"), $"buy in USA {item.Title}"},
                 {new HtmlMetaTagKey("property", "og:image"), item.ImagePath},
+            },
+            new Dictionary<string, object>()
+            {
+                {"getItemData", item}
             });
     }
     

@@ -4,5 +4,6 @@ namespace SeoFriendlySpa.Services;
 
 public interface ISeoService
 {
-    Task<ContentResult> SetMetasAndGetContentResult(string title, IDictionary<HtmlMetaTagKey, string> metasDictionary);
+    Task<ContentResult> SetMetasAndGetContentResult(string title, IDictionary<HtmlMetaTagKey, string> metasDictionary,
+        IDictionary<string, object>? functionData = null);
 }

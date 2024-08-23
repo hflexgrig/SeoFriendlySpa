@@ -234,6 +234,7 @@ _Pvt_Extensions
 # IDEs and editors
 .idea
 /.idea
+**.idea
 .project
 .classpath
 .c9/
@@ -257,6 +258,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+
+#angular
+**/.angular/cache
 
 # System Files
 .DS_Store
